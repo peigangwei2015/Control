@@ -1,6 +1,5 @@
 package com.google.control;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,10 +44,11 @@ public class HomeActivity extends BaseActivity implements OnItemClickListener {
 		lv_user_online = (ListView) findViewById(R.id.lv_user_online);
 		lv_user_online.setOnItemClickListener(this);
 	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
-		if (AnyChatService.onlineList!=null ) {
+		if (AnyChatService.onlineList != null) {
 			// 在线列表
 			adapter = new UserOnlineAdapter();
 			lv_user_online.setAdapter(adapter);
@@ -65,22 +65,6 @@ public class HomeActivity extends BaseActivity implements OnItemClickListener {
 		startActivity(intent);
 	}
 
-	/**
-	 * 接受消息
-	 */
-	@Override
-	public void receiver(Context context, Intent intent) {
-		String msg = intent.getStringExtra("msg");
-		if (msg.equals(MyConstant.USER_ONLINE_CHANGE)) {
-			if (adapter != null)
-				adapter.notifyDataSetChanged();
-			Log.v(TAG, "在线列表发生改变");
-		} else if (msg.equals(MyConstant.USER_ONLINE_LIST)) {
-			// 在线列表
-			adapter = new UserOnlineAdapter();
-			lv_user_online.setAdapter(adapter);
-		}
-	}
 
 	private class UserOnlineAdapter extends BaseAdapter {
 
@@ -135,6 +119,25 @@ public class HomeActivity extends BaseActivity implements OnItemClickListener {
 		Intent intent = new Intent(this, ActionMenuActivity.class);
 		intent.putExtra("user", user);
 		startActivity(intent);
+	}
+
+	@Override
+	public void receiveText(int fromUserId, int toUserId, String message) {
+		
+	}
+
+	@Override
+	public void receiveSelf(String message) {
+		// TODO Auto-generated method stub
+		if (message.equals(MyConstant.USER_ONLINE_CHANGE)) {
+			if (adapter != null)
+				adapter.notifyDataSetChanged();
+			Log.v(TAG, "在线列表发生改变");
+		} else if (message.equals(MyConstant.USER_ONLINE_LIST)) {
+			// 在线列表
+			adapter = new UserOnlineAdapter();
+			lv_user_online.setAdapter(adapter);
+		}
 	}
 
 }

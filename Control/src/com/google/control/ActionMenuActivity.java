@@ -83,10 +83,6 @@ public class ActionMenuActivity extends BaseActivity implements
 
 	}
 
-	@Override
-	public void receiver(Context context, Intent intent) {
-
-	}
 
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position,
@@ -98,5 +94,15 @@ public class ActionMenuActivity extends BaseActivity implements
 			startActivity(intent);
 			break;
 		}
+	}
+
+	@Override
+	public void receiveText(int fromUserId, int toUserId, String message) {
+		
+	}
+
+	@Override
+	public void receiveSelf(String message) {
+		
 	}
 }

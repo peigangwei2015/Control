@@ -19,6 +19,7 @@ import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.bairuitech.anychat.AnyChatTextMsgEvent;
 import com.google.control.domain.User;
+import com.google.control.utils.MsgUtils;
 import com.google.control.utils.MyConstant;
 
 /**
@@ -94,6 +95,8 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 		anyChatSDK.Connect(mServerIP, mServerPort);
 		// 登陆服务器
 		anyChatSDK.Login(mName, mName);
+//		注册接受信息事件
+		anyChatSDK.SetTextMessageEvent(this);
 	}
 
 	/**
@@ -197,21 +200,13 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 				Log.v(TAG, userName + "在线");
 
 			}
-			sendToActivity(MyConstant.USER_ONLINE_LIST);
+			MsgUtils.sendMsg(getApplicationContext(), MyConstant.USER_ONLINE_LIST);
 		} else {
 			Log.e(TAG, "进入房间出错，错误码：" + dwErrorCode);
 		}
 	}
 
-	/**
-	 * 发送广播给界面
-	 */
-	public void sendToActivity(String msg) {
-		Intent intent = new Intent();
-		intent.setAction(MyConstant.ANYCHAT_ACTIVITY_RECEIVE_ACTION);
-		intent.putExtra("msg", msg);
-		sendBroadcast(intent);
-	}
+
 
 	/**
 	 * 网络断开消息，该消息只有在客户端连接服务器成功之后，网络异常中断之时触发，dwErrorCode表示连接断开的原因
@@ -252,7 +247,7 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 					}
 				}
 			}
-			sendToActivity(MyConstant.USER_ONLINE_CHANGE);
+			MsgUtils.sendMsg(getApplicationContext(), MyConstant.USER_ONLINE_CHANGE);
 		}
 	}
 
@@ -300,6 +295,9 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 	 */
 	public void OnAnyChatTextMessage(int dwFromUserid, int dwToUserid,
 			boolean bSecret, String message) {
+		MsgUtils.sendTextToActivity(getApplicationContext(),dwFromUserid, dwToUserid, bSecret, message);
 	}
+
+
 
 }

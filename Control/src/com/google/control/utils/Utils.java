@@ -1,5 +1,8 @@
 package com.google.control.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.text.TextUtils;
 public class Utils {
 	/**
@@ -15,5 +18,24 @@ public class Utils {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * 格式化时间
+	 * @param date
+	 * @return
+	 */
+	public static String formatDate(String format,long date) {
+		SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm:ss");
+		Date date2=new Date(date);
+		Date now=new Date();
+		if (date2.getDay()==now.getDay()) {
+			return "今天 "+dateFormat.format(date2);
+		}else if (date2.getDay()== (now.getDay()-1)) {
+			return "昨天 "+dateFormat.format(date2);
+		}else if (date2.getDay()== (now.getDay()-2)) {
+			return "前天 "+dateFormat.format(date2);
+		}
+		return new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date(date));
 	}
 }

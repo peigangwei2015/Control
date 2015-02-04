@@ -31,4 +31,12 @@ public class MyConstant {
 	 * 发送信息
 	 */
 	public static final String SEND = "send";
+	/**
+	 * 文本信息
+	 */
+	public static final String TEXT_MSG = "text_msg";
+	/**
+	 * 自身的信息
+	 */
+	public static final String SELF_MSG = "self_msg";
 }

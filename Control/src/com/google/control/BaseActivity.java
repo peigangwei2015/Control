@@ -26,28 +26,41 @@ public abstract class BaseActivity extends Activity {
 		super.onStop();
 		unregisterReceiver(receiver);
 	}
-	/**
-	 * 发送信息
-	 * @param command 信息类型
-	 * @param bundle 参数
-	 */
-	protected void send(String command,Bundle bundle) {
-		Intent intent=new Intent();
-		intent.setAction(MyConstant.ANYCHAT_SERVICE_RECEIVE_ACTION);
-		intent.putExtra("command", MyConstant.SEND);
-		intent.putExtras(bundle);
-		sendBroadcast(intent);
-	}
+	
 	
 	private class MyReceiver extends BroadcastReceiver{
-
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			receiver(context,intent);
-			
+			String type = intent.getStringExtra("type");
+			if (MyConstant.SELF_MSG.equals(type)) {
+//				接受自身发的通知消息
+				String message = intent.getStringExtra("message");
+				receiveSelf(message);
+			}else if(MyConstant.TEXT_MSG.equals(type)){
+//				接受文本信息
+				int fromUserId = intent.getIntExtra("fromUserId", Integer.MAX_VALUE);
+				int toUserId = intent.getIntExtra("toUserId", Integer.MAX_VALUE);
+				String message = intent.getStringExtra("message");
+				receiveText(fromUserId,toUserId,message);
+			}
 		}
+
+		
+
 	}
+	
 
-
-	public abstract void receiver(Context context, Intent intent) ;
+	/**
+	 * 接受文本信息
+	 * @param fromUserId 发送者ID
+	 * @param toUserId 接受者ID
+	 * @param message 信息内容
+	 */
+	public abstract void receiveText(int fromUserId,int toUserId,String message);
+	/**
+	 * 接受自身发的通知消息
+	 * @param message
+	 */
+	public abstract void receiveSelf(String message);
+	
 }

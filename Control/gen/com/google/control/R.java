@@ -41,14 +41,19 @@ public final class R {
         public static final int text_but_bg_select=0x7f020011;
     }
     public static final class id {
-        public static final int action_settings=0x7f080007;
-        public static final int et_server_ip=0x7f080002;
-        public static final int et_server_port=0x7f080003;
+        public static final int action_settings=0x7f08000c;
+        public static final int et_server_ip=0x7f080004;
+        public static final int et_server_port=0x7f080005;
         public static final int gv_action_menu=0x7f080000;
-        public static final int iv_icon=0x7f080004;
-        public static final int lv_user_online=0x7f080001;
-        public static final int tv_name=0x7f080005;
-        public static final int tv_status=0x7f080006;
+        public static final int iv_icon=0x7f080006;
+        public static final int ll_load=0x7f080002;
+        public static final int lv_convers=0x7f080001;
+        public static final int lv_user_online=0x7f080003;
+        public static final int tv_body=0x7f080009;
+        public static final int tv_date=0x7f08000a;
+        public static final int tv_name=0x7f080007;
+        public static final int tv_number=0x7f080008;
+        public static final int tv_status=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_action_menu=0x7f030000;
@@ -56,7 +61,8 @@ public final class R {
         public static final int activity_home=0x7f030002;
         public static final int activity_server_config=0x7f030003;
         public static final int list_item_action_menu=0x7f030004;
-        public static final int list_item_user_online=0x7f030005;
+        public static final int list_item_convers=0x7f030005;
+        public static final int list_item_user_online=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f070000;
