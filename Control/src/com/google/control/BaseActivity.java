@@ -38,10 +38,9 @@ public abstract class BaseActivity extends Activity {
 				receiveSelf(message);
 			}else if(MyConstant.TEXT_MSG.equals(type)){
 //				接受文本信息
-				int fromUserId = intent.getIntExtra("fromUserId", Integer.MAX_VALUE);
-				int toUserId = intent.getIntExtra("toUserId", Integer.MAX_VALUE);
+				int dwUserid = intent.getIntExtra("dwUserid", Integer.MAX_VALUE);
 				String message = intent.getStringExtra("message");
-				receiveText(fromUserId,toUserId,message);
+				receiveText(dwUserid,message);
 			}
 		}
 
@@ -53,10 +52,9 @@ public abstract class BaseActivity extends Activity {
 	/**
 	 * 接受文本信息
 	 * @param fromUserId 发送者ID
-	 * @param toUserId 接受者ID
 	 * @param message 信息内容
 	 */
-	public abstract void receiveText(int fromUserId,int toUserId,String message);
+	public abstract void receiveText(int dwUserid,String message);
 	/**
 	 * 接受自身发的通知消息
 	 * @param message

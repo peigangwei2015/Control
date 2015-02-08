@@ -3,6 +3,10 @@ package com.google.control.utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.control.HomeActivity;
+
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 public class Utils {
 	/**
@@ -25,7 +29,7 @@ public class Utils {
 	 * @param date
 	 * @return
 	 */
-	public static String formatDate(String format,long date) {
+	public static String formatDate(long date) {
 		SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm:ss");
 		Date date2=new Date(date);
 		Date now=new Date();
@@ -36,6 +40,8 @@ public class Utils {
 		}else if (date2.getDay()== (now.getDay()-2)) {
 			return "前天 "+dateFormat.format(date2);
 		}
-		return new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date(date));
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date));
 	}
+	
+	
 }

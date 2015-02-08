@@ -115,14 +115,13 @@ public class HomeActivity extends BaseActivity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position,
 			long arg3) {
-		User user = AnyChatService.onlineList.get(position);
+		MyConstant.currentUser = AnyChatService.onlineList.get(position);
 		Intent intent = new Intent(this, ActionMenuActivity.class);
-		intent.putExtra("user", user);
 		startActivity(intent);
 	}
 
 	@Override
-	public void receiveText(int fromUserId, int toUserId, String message) {
+	public void receiveText(int fromUserId, String message) {
 		
 	}
 

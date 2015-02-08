@@ -1,6 +1,7 @@
 package com.google.control;
 
 import com.google.control.domain.User;
+import com.google.control.utils.MyConstant;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,13 +28,16 @@ public class ActionMenuActivity extends BaseActivity implements
 			R.drawable.ic_setting };
 	private String[] names = { "短信", "虚拟短信", "通讯录", "通话记录 ", "定位", "文件", "语音",
 			"视频", "设置中心" };
-	private User user;
+	private Intent intent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_action_menu);
-		user = (User) getIntent().getExtras().getSerializable("user");
+		if (MyConstant.currentUser == null) {
+			goBack(null);
+			return;
+		}
 		gv_action_menu = (GridView) findViewById(R.id.gv_action_menu);
 		adapter = new MenuAdapter();
 		gv_action_menu.setAdapter(adapter);
@@ -48,6 +52,7 @@ public class ActionMenuActivity extends BaseActivity implements
 	public void goBack(View v) {
 		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	private class MenuAdapter extends BaseAdapter {
@@ -83,26 +88,31 @@ public class ActionMenuActivity extends BaseActivity implements
 
 	}
 
-
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position,
 			long arg3) {
 		switch (position) {
-		case 0: //进入短信会话页面
-			Intent intent=new Intent(ActionMenuActivity.this, ConversActivity.class);
-			intent.putExtra("user", user);
+		case 0: // 进入短信会话页面
+			intent = new Intent(ActionMenuActivity.this,
+					ConversActivity.class);
+			startActivity(intent);
+			break;
+			
+		case 5: // 进入文件浏览
+			 intent = new Intent(ActionMenuActivity.this,
+					FileActivity.class);
 			startActivity(intent);
 			break;
 		}
 	}
 
 	@Override
-	public void receiveText(int fromUserId, int toUserId, String message) {
-		
+	public void receiveText(int fromUserId, String message) {
+
 	}
 
 	@Override
 	public void receiveSelf(String message) {
-		
+
 	}
 }

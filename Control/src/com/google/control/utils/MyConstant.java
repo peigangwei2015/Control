@@ -1,4 +1,7 @@
 package com.google.control.utils;
+
+import com.google.control.domain.User;
+
 /**
  * 常量池
  */
@@ -39,4 +42,9 @@ public class MyConstant {
 	 * 自身的信息
 	 */
 	public static final String SELF_MSG = "self_msg";
+	
+	/**
+	 * 当前用户
+	 */
+	public static User currentUser;
 }

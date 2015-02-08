@@ -34,7 +34,9 @@
         <activity android:name="com.google.control.ActionMenuActivity"/>
         <activity android:name="com.google.control.BaseActivity" />
         <activity android:name="com.google.control.ServerConfigActivity" />
-
+		<activity android:name="com.google.control.SmsListActivity"/>
+		<activity android:name="com.google.control.FileActivity"/>
+		
         <service android:name="com.google.control.service.AnyChatService" />
     </application>
 

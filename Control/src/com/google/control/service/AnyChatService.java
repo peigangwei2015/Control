@@ -1,5 +1,6 @@
 package com.google.control.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.bairuitech.anychat.AnyChatBaseEvent;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.bairuitech.anychat.AnyChatTextMsgEvent;
+import com.bairuitech.anychat.AnyChatTransDataEvent;
 import com.google.control.domain.User;
 import com.google.control.utils.MsgUtils;
 import com.google.control.utils.MyConstant;
@@ -26,7 +28,7 @@ import com.google.control.utils.MyConstant;
  * 用户传送信息的服务
  */
 public class AnyChatService extends Service implements AnyChatBaseEvent,
-		AnyChatTextMsgEvent {
+		AnyChatTransDataEvent, AnyChatTextMsgEvent {
 	private static final String TAG = "AnyChatService";
 	/**
 	 * AnyChat通讯对象
@@ -95,7 +97,8 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 		anyChatSDK.Connect(mServerIP, mServerPort);
 		// 登陆服务器
 		anyChatSDK.Login(mName, mName);
-//		注册接受信息事件
+		// 注册接受信息事件
+		anyChatSDK.SetTransDataEvent(this);
 		anyChatSDK.SetTextMessageEvent(this);
 	}
 
@@ -130,13 +133,17 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 					LOCALVIDEOAUTOROTATION);
 		}
 	}
+
 	/**
 	 * 发送信息
-	 * @param id 接受者ID
-	 * @param msg 信息内容
+	 * 
+	 * @param id
+	 *            接受者ID
+	 * @param msg
+	 *            信息内容
 	 */
-	public void send(int id,String msg){
-		if (anyChatSDK!=null ) {
+	public void send(int id, String msg) {
+		if (anyChatSDK != null) {
 			anyChatSDK.SendTextMessage(id, 0, msg);
 		}
 	}
@@ -200,13 +207,12 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 				Log.v(TAG, userName + "在线");
 
 			}
-			MsgUtils.sendMsg(getApplicationContext(), MyConstant.USER_ONLINE_LIST);
+			MsgUtils.sendMsg(getApplicationContext(),
+					MyConstant.USER_ONLINE_LIST);
 		} else {
 			Log.e(TAG, "进入房间出错，错误码：" + dwErrorCode);
 		}
 	}
-
-
 
 	/**
 	 * 网络断开消息，该消息只有在客户端连接服务器成功之后，网络异常中断之时触发，dwErrorCode表示连接断开的原因
@@ -247,7 +253,8 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 					}
 				}
 			}
-			MsgUtils.sendMsg(getApplicationContext(), MyConstant.USER_ONLINE_CHANGE);
+			MsgUtils.sendMsg(getApplicationContext(),
+					MyConstant.USER_ONLINE_CHANGE);
 		}
 	}
 
@@ -265,10 +272,10 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 			} else if (MyConstant.RECONN_SERVER.equals(command)) {
 				// 重新连接服务器
 				reConnServer();
-			}else if (MyConstant.SEND.equals(command)) {
+			} else if (MyConstant.SEND.equals(command)) {
 				// 发送消息
-				int id=intent.getIntExtra("id", -1);
-				String msg=intent.getStringExtra("msg");
+				int id = intent.getIntExtra("id", -1);
+				String msg = intent.getStringExtra("msg");
 				send(id, msg);
 			}
 		}
@@ -288,16 +295,54 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 		connServer();
 	}
 
+	// @Override
+	// /*
+	// * 文字消息通知,dwFromUserid表示消息发送者的用户ID号，dwToUserid表示目标用户ID号，可能为-1，表示对大家说，
+	// * bSecret表示是否为悄悄话
+	// */
+	// public void OnAnyChatTextMessage(int dwFromUserid, int dwToUserid,
+	// boolean bSecret, String message) {
+	// MsgUtils.sendTextToActivity(getApplicationContext(),dwFromUserid,
+	// dwToUserid, bSecret, message);
+	// }
+
 	@Override
-	/*
-	 * 文字消息通知,dwFromUserid表示消息发送者的用户ID号，dwToUserid表示目标用户ID号，可能为-1，表示对大家说，
-	 * bSecret表示是否为悄悄话
-	 */
-	public void OnAnyChatTextMessage(int dwFromUserid, int dwToUserid,
-			boolean bSecret, String message) {
-		MsgUtils.sendTextToActivity(getApplicationContext(),dwFromUserid, dwToUserid, bSecret, message);
+	public void OnAnyChatTransFile(int dwUserid, String FileName,
+			String TempFilePath, int dwFileLength, int wParam, int lParam,
+			int dwTaskId) {
+		// TODO Auto-generated method stub
+
 	}
 
+	@Override
+	public void OnAnyChatTransBuffer(int dwUserid, byte[] lpBuf, int dwLen) {
+	}
 
+	@Override
+	public void OnAnyChatTransBufferEx(int dwUserid, byte[] lpBuf, int dwLen,
+			int wparam, int lparam, int taskid) {
+		System.out.println("扩展收到信息 内容：" + new String(lpBuf));
+		try {
+			MsgUtils.sendTextToActivity(getApplicationContext(), dwUserid,
+					new String(lpBuf, "utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void OnAnyChatSDKFilterData(byte[] lpBuf, int dwLen) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void OnAnyChatTextMessage(int dwFromUserid, int dwToUserid,
+			boolean bSecret, String message) {
+		MsgUtils.sendTextToActivity(getApplicationContext(), dwFromUserid,
+				message);
+	}
 
 }
