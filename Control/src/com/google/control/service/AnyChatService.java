@@ -1,5 +1,10 @@
 package com.google.control.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,6 +26,7 @@ import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.bairuitech.anychat.AnyChatTextMsgEvent;
 import com.bairuitech.anychat.AnyChatTransDataEvent;
+import com.google.control.domain.MsgType;
 import com.google.control.domain.User;
 import com.google.control.utils.MsgUtils;
 import com.google.control.utils.MyConstant;
@@ -30,6 +37,7 @@ import com.google.control.utils.MyConstant;
 public class AnyChatService extends Service implements AnyChatBaseEvent,
 		AnyChatTransDataEvent, AnyChatTextMsgEvent {
 	private static final String TAG = "AnyChatService";
+	private static final String MY_DIR = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Controller/Download";
 	/**
 	 * AnyChat通讯对象
 	 */
@@ -310,8 +318,63 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 	public void OnAnyChatTransFile(int dwUserid, String FileName,
 			String TempFilePath, int dwFileLength, int wParam, int lParam,
 			int dwTaskId) {
-		// TODO Auto-generated method stub
+		moveFile(TempFilePath,FileName,dwUserid);
+	}
 
+	/**
+	 * 移动文件
+	 * @param tempFilePath
+	 * @param fileName 
+	 * @param dwUserid 
+	 */
+	private void moveFile(String tempFilePath, String fileName, int dwUserid) {
+		if (checkDir(MY_DIR)) {
+			FileInputStream fis=null;
+			FileOutputStream fos=null;
+			try {
+				File temp=new File(tempFilePath);
+				 fis=new FileInputStream(temp);
+				 fos=new FileOutputStream(MY_DIR+"/"+fileName);
+				byte[] buffer=new byte[1024];
+				int len=0;
+				while((len=fis.read(buffer))!=-1){
+					fos.write(buffer, 0, len);
+				}
+				fos.flush();
+				temp.delete();
+				Toast.makeText(getApplicationContext(), fileName+"下载成功", 1).show();
+			} catch (Exception e) {
+				Toast.makeText(getApplicationContext(), fileName+"下载失败", 1).show();
+				e.printStackTrace();
+			}finally{
+				try {
+					if (fis!=null) {
+						fis.close();
+						fis=null;
+					}
+					if (fos!=null) {
+						fos.close();
+						fos=null;
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	}
+
+	/**
+	 * 检查文件夹是否创建
+	 * @param myDir
+	 * @return
+	 */
+	private boolean checkDir(String myDir) {
+		File file=new File(myDir);
+		if (file.exists()) {
+			return true;
+		}
+		return file.mkdirs();
 	}
 
 	@Override
@@ -321,7 +384,6 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 	@Override
 	public void OnAnyChatTransBufferEx(int dwUserid, byte[] lpBuf, int dwLen,
 			int wparam, int lparam, int taskid) {
-		System.out.println("扩展收到信息 内容：" + new String(lpBuf));
 		try {
 			MsgUtils.sendTextToActivity(getApplicationContext(), dwUserid,
 					new String(lpBuf, "utf-8"));

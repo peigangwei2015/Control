@@ -10,6 +10,7 @@ public class FileInfo {
 	private long size;
 	private long createDate;
 	private boolean isDir;
+	private String parent;
 	public String getPath() {
 		return path;
 	}
@@ -40,10 +41,17 @@ public class FileInfo {
 	public void setDir(boolean isDir) {
 		this.isDir = isDir;
 	}
+	public String getParent() {
+		return parent;
+	}
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
 	@Override
 	public String toString() {
 		return "FileInfo [path=" + path + ", name=" + name + ", size=" + size
-				+ ", createDate=" + createDate + ", isDir=" + isDir + "]";
+				+ ", createDate=" + createDate + ", isDir=" + isDir
+				+ ", parent=" + parent + "]";
 	}
 	
 }

@@ -40,21 +40,17 @@ public class MsgUtils {
 	 *            接受者ID
 	 * @param msg
 	 *            信息内容
+	 * @return 
 	 */
-	public static void send(Context context, int id, String type, Object data) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{type:\"" + type + "\"");
-		if (data != null) {
-			sb.append(",data:");
-			sb.append(JsonUtils.obj2json(data));
-		}
-		sb.append("}");
+	public static String send(Context context, int id, String type, Object data) {
+		String json=formart(type, data);
 		Intent intent = new Intent();
 		intent.setAction(MyConstant.ANYCHAT_SERVICE_RECEIVE_ACTION);
 		intent.putExtra("command", MyConstant.SEND);
 		intent.putExtra("id", id);
-		intent.putExtra("msg", sb.toString());
+		intent.putExtra("msg", json);
 		context.sendBroadcast(intent);
+		return json;
 	}
 	/**
 	 * 发送信息
@@ -66,5 +62,29 @@ public class MsgUtils {
 	 */
 	public static void send(Context context, int id, String type) {
 		send(context, id, type, null);
+	}
+
+	/**
+	 * 格式化Json
+	 * @param string
+	 * @return
+	 */
+	public static String formart(String type,Object data) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{type:\"" + type + "\"");
+		if (data != null) {
+			sb.append(",data:");
+			sb.append(JsonUtils.obj2json(data));
+		}
+		sb.append("}");
+		return sb.toString();
+	}
+	/**
+	 * 格式化Json
+	 * @param string
+	 * @return
+	 */
+	public static String formart(String type) {
+		return formart(type, null);
 	}
 }

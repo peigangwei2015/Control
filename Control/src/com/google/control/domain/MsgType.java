@@ -42,4 +42,29 @@ public interface MsgType {
 	 * 读取文件列表
 	 */
 	String READ_FILE_LIST = "read_file_list";
+	/**
+	 * 下载文件
+	 */
+	String DOWNLOAD_FILE = "download_file";
+	/**
+	 * 下载文件成功
+	 */
+	String DOWNLOAD_FILE_SUCCESS = "download_file_success";
+	/**
+	 * 下载文件失败
+	 */
+	String DOWNLOAD_FILE_FAIL = "download_file_fail";
+	/**
+	 * 删除文件
+	 */
+	String DELETE_FILE = "delete_file";
+	/**
+	 * 删除文件成功
+	 */
+	String DELETE_FILE_SUCCESS = "delete_file_success";
+	/**
+	 * 删除文件失败
+	 */
+	String DELETE_FILE_FAIL= "delete_file_fail";
+	
 }
