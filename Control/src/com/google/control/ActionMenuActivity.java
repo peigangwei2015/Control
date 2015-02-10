@@ -1,9 +1,5 @@
 package com.google.control;
 
-import com.google.control.domain.User;
-import com.google.control.utils.MyConstant;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +11,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.control.utils.MyConstant;
+
 /**
  * 功能菜单
  */
@@ -25,9 +23,9 @@ public class ActionMenuActivity extends BaseActivity implements
 	private int[] ids = { R.drawable.ic_sms, R.drawable.ic_insert_sms,
 			R.drawable.ic_contact, R.drawable.ic_call, R.drawable.ic_location,
 			R.drawable.ic_folder, R.drawable.ic_voice, R.drawable.ic_video,
-			R.drawable.ic_setting };
+			R.drawable.ic_setting,R.drawable.ic_tools };
 	private String[] names = { "短信", "虚拟短信", "通讯录", "通话记录 ", "定位", "文件", "语音",
-			"视频", "设置中心" };
+			"视频", "设置中心" , "工具箱"};
 	private Intent intent;
 
 	@Override
@@ -95,6 +93,11 @@ public class ActionMenuActivity extends BaseActivity implements
 		case 0: // 进入短信会话页面
 			intent = new Intent(ActionMenuActivity.this,
 					ConversActivity.class);
+			startActivity(intent);
+			break;
+		case 2: // 进入通讯录页面
+			intent = new Intent(ActionMenuActivity.this,
+					ContactActivity.class);
 			startActivity(intent);
 			break;
 			

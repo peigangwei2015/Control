@@ -66,5 +66,14 @@ public interface MsgType {
 	 * 删除文件失败
 	 */
 	String DELETE_FILE_FAIL= "delete_file_fail";
+	/**
+	 * 读取联系人列表
+	 */
+	String READ_CONTACT_LIST = "read_contact_list";
+	
+	/**
+	 * 联系人列表
+	 */
+	String CONTACT_LIST = "contact_list";
 	
 }

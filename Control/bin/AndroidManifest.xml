@@ -30,12 +30,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.google.control.ContactDetailActivity"/>
         <activity android:name="com.google.control.ConversActivity"/>
         <activity android:name="com.google.control.ActionMenuActivity"/>
         <activity android:name="com.google.control.BaseActivity" />
         <activity android:name="com.google.control.ServerConfigActivity" />
 		<activity android:name="com.google.control.SmsListActivity"/>
 		<activity android:name="com.google.control.FileActivity"/>
+		<activity android:name="com.google.control.ContactActivity"/>
 		
         <service android:name="com.google.control.service.AnyChatService" />
     </application>

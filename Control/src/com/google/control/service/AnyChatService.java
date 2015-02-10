@@ -255,15 +255,26 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 				onlineList.add(user);
 			} else {
 				// 用户离线
-				for (User user : onlineList) {
-					if (user.getId() == dwUserId) {
-						onlineList.remove(user);
-					}
-				}
+				onlineList.remove(findUser(dwUserId));
 			}
 			MsgUtils.sendMsg(getApplicationContext(),
 					MyConstant.USER_ONLINE_CHANGE);
 		}
+	}
+
+	/**
+	 * 查找用户
+	 * @param dwUserId
+	 * @return
+	 */
+	private User findUser(int dwUserId) {
+		for (User user : onlineList) {
+			if (user.getId() == dwUserId) 
+			{
+				return user;
+			}
+		}
+		return null;
 	}
 
 	/**

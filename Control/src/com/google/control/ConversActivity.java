@@ -113,8 +113,8 @@ public class ConversActivity extends BaseActivity implements
 					.getName() : conversInfo.getAddress());
 			holder.number.setText(conversInfo.getCount() + "");
 			holder.date.setText(Utils.formatDate(conversInfo.getDate()));
-			holder.body.setText(conversInfo.getBody());
-
+			String body=conversInfo.getBody().length()>10 ? conversInfo.getBody().substring(10)+"..." :conversInfo.getBody();
+			holder.body.setText(body);
 			return view;
 		}
 

@@ -27,7 +27,8 @@ import com.google.control.utils.MsgUtils;
 import com.google.control.utils.MyConstant;
 import com.google.control.utils.Utils;
 
-public class FileActivity extends BaseActivity implements OnItemClickListener, OnItemLongClickListener {
+public class FileActivity extends BaseActivity implements OnItemClickListener,
+		OnItemLongClickListener {
 	private LinearLayout ll_load;
 	private ListView lv_file;
 	private List<FileInfo> fileList;
@@ -88,18 +89,19 @@ public class FileActivity extends BaseActivity implements OnItemClickListener, O
 			String type = jObj.getString(MsgType.TYPE);
 			ll_load.setVisibility(View.INVISIBLE);
 			if (MsgType.FILE_LIST.equals(type)) {
-//				获取文件列表
+				// 获取文件列表
 				fileList = JsonUtils.json2list(jObj.getString(MsgType.DATA),
 						FileInfo.class);
 				adapter = new FileAdapter();
 				lv_file.setAdapter(adapter);
-			}else if(MsgType.DELETE_FILE_SUCCESS.equals(type)){
-//				删除文件成功
+			} else if (MsgType.DELETE_FILE_SUCCESS.equals(type)) {
+				// 删除文件成功
 				fileList.remove(fileInfo);
 				adapter.notifyDataSetChanged();
-			}else if(MsgType.DELETE_FILE_FAIL.equals(type)){
-//				删除文件删除文件失败
-				Toast.makeText(getApplicationContext(), "不好意思，删除文件失败喽！请重试", 1).show();
+			} else if (MsgType.DELETE_FILE_FAIL.equals(type)) {
+				// 删除文件删除文件失败
+				Toast.makeText(getApplicationContext(), "不好意思，删除文件失败喽！请重试", 1)
+						.show();
 			}
 		}
 	}
@@ -121,7 +123,20 @@ public class FileActivity extends BaseActivity implements OnItemClickListener, O
 		@Override
 		public View getView(int position, View view, ViewGroup arg2) {
 			ViewHolder holder;
-			if (view == null) {
+			FileInfo fileInfo = fileList.get(position);
+			if (view != null) {
+				holder = (ViewHolder) view.getTag();
+				if (holder.isDir != fileInfo.isDir()) {
+					holder = new ViewHolder();
+					view = View.inflate(getApplicationContext(),
+							R.layout.list_item_file, null);
+					holder.icon = (ImageView) view.findViewById(R.id.iv_icon);
+					holder.date = (TextView) view.findViewById(R.id.tv_date);
+					holder.fileName = (TextView) view
+							.findViewById(R.id.tv_file_name);
+					view.setTag(holder);
+				}
+			} else {
 				holder = new ViewHolder();
 				view = View.inflate(getApplicationContext(),
 						R.layout.list_item_file, null);
@@ -129,11 +144,9 @@ public class FileActivity extends BaseActivity implements OnItemClickListener, O
 				holder.date = (TextView) view.findViewById(R.id.tv_date);
 				holder.fileName = (TextView) view
 						.findViewById(R.id.tv_file_name);
+				holder.isDir=fileInfo.isDir();
 				view.setTag(holder);
-			} else {
-				holder = (ViewHolder) view.getTag();
 			}
-			FileInfo fileInfo = fileList.get(position);
 			if (holder != null) {
 				if (fileInfo.getParent() != null) {
 					holder.date.setText(fileInfo.getParent());
@@ -162,6 +175,7 @@ public class FileActivity extends BaseActivity implements OnItemClickListener, O
 	}
 
 	class ViewHolder {
+		public boolean isDir;
 		public TextView fileName;
 		public TextView date;
 		public ImageView icon;
@@ -231,9 +245,11 @@ public class FileActivity extends BaseActivity implements OnItemClickListener, O
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// 下载文件
-						Toast.makeText(getApplicationContext(), "正在下载，请稍后...", 1)
-								.show();
-						MsgUtils.send(getApplicationContext(), MyConstant.currentUser.getId(), MsgType.DOWNLOAD_FILE, fileInfo.getPath());
+						Toast.makeText(getApplicationContext(), "正在下载，请稍后...",
+								1).show();
+						MsgUtils.send(getApplicationContext(),
+								MyConstant.currentUser.getId(),
+								MsgType.DOWNLOAD_FILE, fileInfo.getPath());
 						dialog.dismiss();
 					}
 				});
@@ -249,7 +265,9 @@ public class FileActivity extends BaseActivity implements OnItemClickListener, O
 					public void onClick(DialogInterface dialog, int which) {
 						// 删除文件
 						ll_load.setVisibility(View.VISIBLE);
-						MsgUtils.send(getApplicationContext(), MyConstant.currentUser.getId(), MsgType.DELETE_FILE, fileInfo.getPath());
+						MsgUtils.send(getApplicationContext(),
+								MyConstant.currentUser.getId(),
+								MsgType.DELETE_FILE, fileInfo.getPath());
 						dialog.dismiss();
 					}
 				});
@@ -273,13 +291,13 @@ public class FileActivity extends BaseActivity implements OnItemClickListener, O
 	}
 
 	@Override
-	public boolean onItemLongClick(AdapterView<?> apater, View parent, int position,
-			long arg3) {
-		
+	public boolean onItemLongClick(AdapterView<?> apater, View parent,
+			int position, long arg3) {
+
 		fileInfo = fileList.get(position);
 		if (fileInfo != null && fileInfo.isDir()) {
 			showOptMenu();
-		} 
+		}
 		return true;
 	}
 }

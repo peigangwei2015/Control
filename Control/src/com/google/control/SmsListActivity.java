@@ -29,13 +29,7 @@ public class SmsListActivity extends BaseActivity {
 	private List<SmsInfo> smsList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if (MyConstant.currentUser==null) {
-			Intent intent=new Intent(this, HomeActivity.class);
-			startActivity(intent);
-			finish();
-			return;
-		}
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sms_list);
 		init();
@@ -69,6 +63,7 @@ public class SmsListActivity extends BaseActivity {
 	@Override
 	public void receiveText(int fromUserId, String message) {
 		if (!TextUtils.isEmpty(message)) {
+			System.out.println(message);
 			JSONObject jObj=JSONObject.parseObject(message);
 			String type=jObj.getString(MsgType.TYPE);
 			if (MsgType.SMS_LIST.equals(type)) {

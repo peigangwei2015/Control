@@ -11,10 +11,11 @@
         android:background="#53ABEA" >
 
         <Button
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
-            android:background="@drawable/ic_back_button"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/ic_go_back"
             android:onClick="goBack" />
 
         <TextView
