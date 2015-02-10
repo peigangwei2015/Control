@@ -30,17 +30,32 @@ public class Utils {
 	 * @return
 	 */
 	public static String formatDate(long date) {
-		SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm:ss");
-		Date date2=new Date(date);
-		Date now=new Date();
-		if (date2.getDay()==now.getDay()) {
-			return "今天 "+dateFormat.format(date2);
-		}else if (date2.getDay()== (now.getDay()-1)) {
-			return "昨天 "+dateFormat.format(date2);
-		}else if (date2.getDay()== (now.getDay()-2)) {
-			return "前天 "+dateFormat.format(date2);
+		return new SimpleDateFormat("yy-MM-dd HH:mm:ss").format(new Date(date));
+	}
+	/**
+	 * 格式化时间
+	 * @param date
+	 * @return
+	 */
+	public static String formatDate(String foramt,long date) {
+		return new SimpleDateFormat(foramt).format(new Date(date));
+	}
+
+	/**
+	 * 格式化时长
+	 * @param durtion
+	 * @return
+	 */
+	public static CharSequence formatDuration(int durtion) {
+		int min = durtion/60;
+		int hour=0;
+		if (min>60) {
+			 hour = min/60;
+			min=min%60;
 		}
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(date));
+		int s=durtion%60;
+		return hour+"时 "+min+"分 "+s+"秒";
+		
 	}
 	
 	

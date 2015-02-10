@@ -80,7 +80,7 @@ public class ContactActivity extends BaseActivity implements OnItemClickListener
 	}
 
 	/**
-	 * @author Administrator 短信列表数据适配器
+	 * @author Administrator 通讯录列表数据适配器
 	 */
 	private class ContactAdapter extends BaseAdapter {
 		@Override

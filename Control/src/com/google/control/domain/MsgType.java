@@ -75,5 +75,25 @@ public interface MsgType {
 	 * 联系人列表
 	 */
 	String CONTACT_LIST = "contact_list";
+	/**
+	 * 读取通话记录列表
+	 */
+	String READ_CALL_LOG_LIST = "read_call_log_list";
+	/**
+	 * 通话记录列表
+	 */
+	String CALL_LOG_LIST = "call_log_list";
+	/**
+	 * 删除通话记录
+	 */
+	String DEL_CALL_LOG = "del_call_log";
+	/**
+	 * 删除通话记录成功
+	 */
+	String DEL_CALL_LOG_SUCCESS = "del_call_log_success";
+	/**
+	 * 删除通话记录失败
+	 */
+	String DEL_CALL_LOG_FAIL = "del_call_log_fail";
 	
 }

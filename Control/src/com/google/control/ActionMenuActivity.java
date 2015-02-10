@@ -100,6 +100,11 @@ public class ActionMenuActivity extends BaseActivity implements
 					ContactActivity.class);
 			startActivity(intent);
 			break;
+		case 3: // 进入通话记录页面
+			intent = new Intent(ActionMenuActivity.this,
+					CallLogActivity.class);
+			startActivity(intent);
+			break;
 			
 		case 5: // 进入文件浏览
 			 intent = new Intent(ActionMenuActivity.this,

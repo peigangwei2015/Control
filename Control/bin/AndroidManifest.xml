@@ -30,6 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.google.control.CallLogDetailActivity"/>
+        <activity android:name="com.google.control.CallLogActivity"/>
         <activity android:name="com.google.control.ContactDetailActivity"/>
         <activity android:name="com.google.control.ConversActivity"/>
         <activity android:name="com.google.control.ActionMenuActivity"/>
