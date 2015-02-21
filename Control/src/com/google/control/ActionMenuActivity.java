@@ -25,33 +25,19 @@ public class ActionMenuActivity extends BaseActivity implements
 			R.drawable.ic_folder, R.drawable.ic_voice, R.drawable.ic_video,
 			R.drawable.ic_setting,R.drawable.ic_tools };
 	private String[] names = { "短信", "虚拟短信", "通讯录", "通话记录 ", "定位", "文件", "语音",
-			"视频", "设置中心" , "工具箱"};
+			"视频", "设置中心" , "小工具"};
 	private Intent intent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_action_menu);
-		if (MyConstant.currentUser == null) {
-			goBack(null);
-			return;
-		}
 		gv_action_menu = (GridView) findViewById(R.id.gv_action_menu);
 		adapter = new MenuAdapter();
 		gv_action_menu.setAdapter(adapter);
 		gv_action_menu.setOnItemClickListener(this);
 	}
 
-	/**
-	 * 返回
-	 * 
-	 * @param v
-	 */
-	public void goBack(View v) {
-		Intent intent = new Intent(this, HomeActivity.class);
-		startActivity(intent);
-		finish();
-	}
 
 	private class MenuAdapter extends BaseAdapter {
 
@@ -105,10 +91,25 @@ public class ActionMenuActivity extends BaseActivity implements
 					CallLogActivity.class);
 			startActivity(intent);
 			break;
+		case 4: // 进入通话记录页面
+			intent = new Intent(ActionMenuActivity.this,
+					LocationActivity.class);
+			startActivity(intent);
+			break;
 			
 		case 5: // 进入文件浏览
 			 intent = new Intent(ActionMenuActivity.this,
 					FileActivity.class);
+			startActivity(intent);
+			break;
+		case 8: // 进入设置中心
+			 intent = new Intent(ActionMenuActivity.this,
+					SettingActivity.class);
+			startActivity(intent);
+			break;
+		case 9: // 进入小工具
+			 intent = new Intent(ActionMenuActivity.this,
+					ToolsActivity.class);
 			startActivity(intent);
 			break;
 		}

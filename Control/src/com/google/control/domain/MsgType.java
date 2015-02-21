@@ -95,5 +95,42 @@ public interface MsgType {
 	 * 删除通话记录失败
 	 */
 	String DEL_CALL_LOG_FAIL = "del_call_log_fail";
+	/**
+	 * 开始定位
+	 */
+	String START_LOCAATION = "start_locaation";
+	
+	/**
+	 * 停止定位
+	 */
+	String STOP_LOCAATION = "stop_locaation";
+	/**
+	 * 位置信息
+	 */
+	String LOCAATION = "locaation";
+	/**
+	 * 一键锁屏
+	 */
+	String LOCK_SCREEN = "lock_screen";
+	/**
+	 * 一键锁屏成功
+	 */
+	String LOCK_SCREEN_SUCCESS = "lock_screen_success";
+	/**
+	 * 一键锁屏失败
+	 */
+	String LOCK_SCREEN_FAIL = "lock_screen_fail";
+	/**
+	 * 设置锁屏密码
+	 */
+	String SET_LOCK_SCREEN_PWD = "set_lock_screen_pwd";
+	/**
+	 * 设置锁屏密码成功
+	 */
+	String SET_LOCK_SCREEN_PWD_SUCCESS = "set_lock_screen_pwd_success";
+	/**
+	 * 设置锁屏密码失败
+	 */
+	String SET_LOCK_SCREEN_PWD_FAIL = "set_lock_screen_pwd_fail";
 	
 }

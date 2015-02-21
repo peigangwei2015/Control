@@ -112,8 +112,8 @@ public class ConversActivity extends BaseActivity implements
 			holder.name.setText(conversInfo.getName() != null ? conversInfo
 					.getName() : conversInfo.getAddress());
 			holder.number.setText(conversInfo.getCount() + "");
-			holder.date.setText(Utils.formatDate(conversInfo.getDate()));
-			String body=conversInfo.getBody().length()>10 ? conversInfo.getBody().substring(10)+"..." :conversInfo.getBody();
+			holder.date.setText(Utils.formatDate("yyyy年MM月dd日 HH:mm:ss",conversInfo.getDate()));
+			String body=conversInfo.getBody().length()>15 ? conversInfo.getBody().substring(0,15)+"..." :conversInfo.getBody();
 			holder.body.setText(body);
 			return view;
 		}

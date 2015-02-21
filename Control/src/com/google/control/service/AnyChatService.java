@@ -175,6 +175,7 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 		if (bSuccess) {
 			Log.v(TAG, mName + "连接服务器成功");
 			Toast.makeText(getApplicationContext(), "连接服务器成功", 1).show();
+			test();
 		} else {
 			Log.v(TAG, mName + "连接服务器失败");
 			Toast.makeText(getApplicationContext(), "连接服务器失败", 1).show();
@@ -220,6 +221,20 @@ public class AnyChatService extends Service implements AnyChatBaseEvent,
 		} else {
 			Log.e(TAG, "进入房间出错，错误码：" + dwErrorCode);
 		}
+	}
+	
+	
+	/**
+	 * 测试数据
+	 */
+	public void test(){
+		User user = new User();
+		user.setId(1);
+		user.setName("张三");
+		user.setOnline(true);
+		onlineList.add(user);
+		MsgUtils.sendMsg(getApplicationContext(),
+				MyConstant.USER_ONLINE_LIST);
 	}
 
 	/**

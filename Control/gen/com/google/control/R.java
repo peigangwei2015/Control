@@ -106,29 +106,34 @@ public final class R {
         public static final int zip=0x7f020052;
     }
     public static final class id {
-        public static final int action_settings=0x7f080016;
-        public static final int et_server_ip=0x7f08000e;
-        public static final int et_server_port=0x7f08000f;
+        public static final int action_settings=0x7f08001b;
+        public static final int bt_cancle=0x7f080019;
+        public static final int bt_clear=0x7f08001a;
+        public static final int bt_ok=0x7f080018;
+        public static final int et_confirm_password=0x7f080017;
+        public static final int et_password=0x7f080016;
+        public static final int et_server_ip=0x7f08000d;
+        public static final int et_server_port=0x7f08000e;
         public static final int gv_action_menu=0x7f080000;
-        public static final int iv_call_icon=0x7f080004;
-        public static final int iv_icon=0x7f080011;
-        public static final int iv_type=0x7f080008;
-        public static final int ll_load=0x7f080002;
+        public static final int iv_call_icon=0x7f080003;
+        public static final int iv_icon=0x7f080010;
+        public static final int iv_type=0x7f080007;
+        public static final int ll_load=0x7f080015;
         public static final int lv_calllog=0x7f080001;
-        public static final int lv_contact=0x7f08000a;
-        public static final int lv_convers=0x7f08000b;
-        public static final int lv_file=0x7f08000c;
-        public static final int lv_sms=0x7f080010;
-        public static final int lv_user_online=0x7f08000d;
-        public static final int tv_body=0x7f080013;
-        public static final int tv_call_date=0x7f080012;
-        public static final int tv_date=0x7f080007;
-        public static final int tv_duration=0x7f080009;
-        public static final int tv_file_name=0x7f080014;
-        public static final int tv_name=0x7f080005;
-        public static final int tv_number=0x7f080006;
-        public static final int tv_status=0x7f080015;
-        public static final int tv_title=0x7f080003;
+        public static final int lv_contact=0x7f080009;
+        public static final int lv_convers=0x7f08000a;
+        public static final int lv_file=0x7f08000b;
+        public static final int lv_sms=0x7f08000f;
+        public static final int lv_user_online=0x7f08000c;
+        public static final int tv_body=0x7f080012;
+        public static final int tv_call_date=0x7f080011;
+        public static final int tv_date=0x7f080006;
+        public static final int tv_duration=0x7f080008;
+        public static final int tv_file_name=0x7f080013;
+        public static final int tv_name=0x7f080004;
+        public static final int tv_number=0x7f080005;
+        public static final int tv_status=0x7f080014;
+        public static final int tv_title=0x7f080002;
     }
     public static final class layout {
         public static final int activity_action_menu=0x7f030000;
@@ -139,15 +144,21 @@ public final class R {
         public static final int activity_convers=0x7f030005;
         public static final int activity_file=0x7f030006;
         public static final int activity_home=0x7f030007;
-        public static final int activity_server_config=0x7f030008;
-        public static final int activity_sms_list=0x7f030009;
-        public static final int list_item_action_menu=0x7f03000a;
-        public static final int list_item_calllog=0x7f03000b;
-        public static final int list_item_contact=0x7f03000c;
-        public static final int list_item_convers=0x7f03000d;
-        public static final int list_item_file=0x7f03000e;
-        public static final int list_item_sms=0x7f03000f;
-        public static final int list_item_user_online=0x7f030010;
+        public static final int activity_location=0x7f030008;
+        public static final int activity_server_config=0x7f030009;
+        public static final int activity_setting=0x7f03000a;
+        public static final int activity_sms_list=0x7f03000b;
+        public static final int activity_tools=0x7f03000c;
+        public static final int line=0x7f03000d;
+        public static final int list_item_action_menu=0x7f03000e;
+        public static final int list_item_calllog=0x7f03000f;
+        public static final int list_item_contact=0x7f030010;
+        public static final int list_item_convers=0x7f030011;
+        public static final int list_item_file=0x7f030012;
+        public static final int list_item_sms=0x7f030013;
+        public static final int list_item_user_online=0x7f030014;
+        public static final int loading=0x7f030015;
+        public static final int setup_password_dialog=0x7f030016;
     }
     public static final class menu {
         public static final int main=0x7f070000;

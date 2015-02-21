@@ -61,11 +61,7 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:layout_margin="5dp"
-        android:background="#999999" />
+    <include layout="@layout/line" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,11 +83,7 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:layout_margin="5dp"
-        android:background="#999999" />
+    <include layout="@layout/line" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -113,19 +105,15 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:layout_margin="5dp"
-        android:background="#999999" />
-    
-        <LinearLayout
+    <include layout="@layout/line" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="deleteCallLog"
         android:background="@drawable/text_but_bg_select"
+        android:clickable="true"
         android:gravity="center_vertical"
+        android:onClick="deleteCallLog"
         android:orientation="horizontal" >
 
         <ImageView
@@ -141,58 +129,55 @@
             android:textColor="#000000"
             android:textSize="18sp" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:layout_margin="5dp"
-        android:background="#999999" />
-    <TextView 
+
+    <include layout="@layout/line" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="历史记录"
-        android:textSize="12sp"
         android:layout_marginLeft="10dp"
+        android:text="历史记录"
         android:textColor="#000000"
-        />
-      <View
+        android:textSize="12sp" />
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="5dp"
         android:background="#0000ff" />
-      <RelativeLayout 
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingLeft="5dp"
-          android:paddingRight="5dp"
-          >
-          <TextView 
-              android:id="@+id/tv_date"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="2015年2月10日  10:10:22"
-              android:textSize="20sp"
-              android:layout_centerVertical="true"
-              android:textColor="#000000"
-              />
-          
-          <ImageView 
-              android:id="@+id/iv_type"
-              android:layout_width="20dp"
-              android:layout_height="20dp"
-              android:layout_alignParentRight="true"
-             android:src="@drawable/ic_incoming_call"
-              />
-          <TextView 
-              android:id="@+id/tv_duration"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="1分14秒"
-              android:textSize="14sp"
-              android:textColor="#000000"
-              android:layout_marginTop="3dp"
-              android:layout_alignParentRight="true"
-              android:layout_below="@id/iv_type"
-              />
-      </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="2015年2月10日  10:10:22"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/iv_type"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_incoming_call" />
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/iv_type"
+            android:layout_marginTop="3dp"
+            android:text="1分14秒"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+    </RelativeLayout>
 
 </LinearLayout>

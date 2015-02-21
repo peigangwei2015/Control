@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
 public abstract class BaseActivity extends Activity {
 	private BroadcastReceiver receiver;
 
@@ -25,6 +26,17 @@ public abstract class BaseActivity extends Activity {
 	protected void onStop() {
 		super.onStop();
 		unregisterReceiver(receiver);
+	}
+	
+	
+	/**
+	 * 返回
+	 * 
+	 * @param v
+	 */
+	public void goBack(View v) {
+		Intent intent = new Intent(this, ActionMenuActivity.class);
+		startActivity(intent);
 	}
 	
 	

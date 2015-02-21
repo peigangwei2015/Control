@@ -15,6 +15,7 @@ import com.google.control.utils.MyConstant;
 import com.google.control.utils.Utils;
 
 /**
+ * 呼叫记录详情 界面
  * @author Administrator
  *
  */
@@ -76,15 +77,6 @@ public class CallLogDetailActivity extends BaseActivity {
 		}
 	}
 
-	/**
-	 * 返回
-	 * 
-	 * @param v
-	 */
-	public void goBack(View v) {
-		Intent intent = new Intent(this, CallLogActivity.class);
-		startActivity(intent);
-	}
 
 	@Override
 	public void receiveText(int dwUserid, String message) {
@@ -93,7 +85,6 @@ public class CallLogDetailActivity extends BaseActivity {
 			String type = jObj.getString(MsgType.TYPE);
 			if (MsgType.DEL_CALL_LOG_SUCCESS.equals(type)) {
 				Toast.makeText(getApplicationContext(), "删除成功。", 1).show();
-				goBack(null);
 			}else if(MsgType.DEL_CALL_LOG_FAIL.equals(type)){
 				Toast.makeText(getApplicationContext(), "删除失败。", 1).show();
 			}
