@@ -102,6 +102,11 @@ public class ActionMenuActivity extends BaseActivity implements
 					FileActivity.class);
 			startActivity(intent);
 			break;
+		case 6: // 进入语音
+			 intent = new Intent(ActionMenuActivity.this,
+					VoiceActivity.class);
+			startActivity(intent);
+			break;
 		case 8: // 进入设置中心
 			 intent = new Intent(ActionMenuActivity.this,
 					SettingActivity.class);

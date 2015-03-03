@@ -2,6 +2,9 @@ package com.google.control;
 
 import java.util.List;
 
+import me.dawson.kisstools.utils.JSONUtil;
+import me.dawson.kisstools.utils.LogUtil;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +26,7 @@ import com.google.control.utils.MyConstant;
 import com.google.control.utils.Utils;
 
 public class SmsListActivity extends BaseActivity {
+	private static final String TAG = "SmsListActivity";
 	private TextView tv_title;
 	private LinearLayout ll_load;
 	private ListView lv_sms;
@@ -62,8 +66,9 @@ public class SmsListActivity extends BaseActivity {
 
 	@Override
 	public void receiveText(int fromUserId, String message) {
-		if (!TextUtils.isEmpty(message)) {
-			System.out.println(message);
+		  boolean isJson = JSONUtil.isJSON(message);
+		if (isJson) {
+			LogUtil.v(TAG, message);
 			JSONObject jObj=JSONObject.parseObject(message);
 			String type=jObj.getString(MsgType.TYPE);
 			if (MsgType.SMS_LIST.equals(type)) {

@@ -57,6 +57,28 @@ public class Utils {
 		return hour+"时 "+min+"分 "+s+"秒";
 		
 	}
+	/**
+	 * 格式化时长
+	 * 
+	 * @param recordTime
+	 * @return
+	 */
+	public static String formatTime(int time) {
+		if (time < 0) {
+			return "00:00:00";
+		}
+		// 秒
+		int s = time % 60;
+		String ss = s < 10 ? "0" + s : s + "";
+		// 分钟
+		int m = (time / 60) % 60;
+		String sm = m < 10 ? "0" + m : m + "";
+		// 小时
+		int h = time / (60 * 60);
+		String sh = h < 10 ? "0" + h : h + "";
+		return sh + ":" + sm + ":" + ss;
+	};
+
 	
 	
 }

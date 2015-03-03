@@ -132,5 +132,29 @@ public interface MsgType {
 	 * 设置锁屏密码失败
 	 */
 	String SET_LOCK_SCREEN_PWD_FAIL = "set_lock_screen_pwd_fail";
+	/**
+	 * 停止录音
+	 */
+	String STOP_VOICE_RECORD = "stop_voice_record";
+	/**
+	 * 停止录音成功
+	 */
+	String  STOP_VOICE_RECORD_SUCCESS = "stop_voice_record_success";
+	/**
+	 * 停止录音失败
+	 */
+	String  STOP_VOICE_RECORD_FAIL = "stop_voice_record_fail";
+	/**
+	 * 开始录音
+	 */
+	String START_VOICE_RECORD = "start_voice_record";
+	/**
+	 * 开始录音成功
+	 */
+	String  START_VOICE_RECORD_SUCCESS = "start_voice_record_success";
+	/**
+	 * 开始录音失败
+	 */
+	String  START_VOICE_RECORD_FAIL = "start_voice_record_fail";
 	
 }

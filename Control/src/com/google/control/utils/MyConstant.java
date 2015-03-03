@@ -42,6 +42,10 @@ public class MyConstant {
 	 * 自身的信息
 	 */
 	public static final String SELF_MSG = "self_msg";
+	/**
+	 * 百度地图的Key
+	 */
+	public static final String BD_MAP_KEY = "bO8B5EPgghNSzq3N7PYFGHZP";
 	
 	/**
 	 * 当前用户
